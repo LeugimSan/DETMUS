@@ -17,11 +17,9 @@ options(guiToolkit="tcltk")
 require(gWidgets2tcltk)
 
 # Establecimiento de la carpeta de trabajo 
-# OJO: Cambiar a las carpetas correctas!!!!! 
-# ... en todos los sitios que aparecen en este c骴igo
 setwd("C:/Users/mrodmui/Desktop/DETMUS")
 
-# Funci髇 
+# Funci贸n 
 detmus=function()
 {
   options(guiToolkit="tcltk")
@@ -75,7 +73,7 @@ classical=function()
 image.import=gfile("Select IMAGE to import...",filter="*.*")
 image=load.image(image.import)
 # Esto nos pinta la imagen 
-# (s髄o para comprobar que se carga correctamente)
+# (s贸lo para comprobar que se carga correctamente)
 # no la carga con el aspect-ratio adecuado pero eso no influye
 plot(image)
 class(image)
@@ -84,7 +82,7 @@ x=dim(image)[1]
 y=dim(image)[2]
 cc=dim(image)[4]
 
-#Procesado de la matriz num閞ica que vamos a usar para generar los sonidos
+#Procesado de la matriz num茅rica que vamos a usar para generar los sonidos
 
 # Forma antigua
 # image.data=as.data.frame(image) <- Forma antigua
@@ -101,7 +99,7 @@ secuence.int=secuence[,4]*100000000000
 secuence.end=trunc(secuence.int)
 
 
-# Generaci髇 del TRACK de Viol韓
+# Generaci贸n del TRACK de Viol铆n
 setwd("C:/Users/mrodmui/Desktop/DETMUS/LOOPS/POSS/violin_C/")
 # duracion=x*y 
 duracion=50
@@ -121,7 +119,7 @@ setwd("C:/Users/mrodmui/Desktop/DETMUS/TRACKS_GENERADOS")
 writeWave(Wobj2, filename = "Track_violin.wav")
 setwd("C:/Users/mrodmui/Desktop/DETMUS")
 
-# Generaci髇 del TRACK de Flauta
+# Generaci贸n del TRACK de Flauta
 setwd("C:/Users/mrodmui/Desktop/DETMUS/LOOPS/POSS/flute_C/")
 # duracion=x*y 
 duracion=20
@@ -140,32 +138,26 @@ for (contador in 1:duracion)
 setwd("C:/Users/mrodmui/Desktop/DETMUS/TRACKS_GENERADOS")
 writeWave(Wobj2, filename = "Track_flauta.wav")
 setwd("C:/Users/mrodmui/Desktop/DETMUS")
-
-
 }
 
-
-
-
-# Generaci髇 del TRACK de Percusi髇 (TR-909)
-# setwd("C:/Users/mrodmui/Desktop/DETMUS/LOOPS/ROLAND_TR-909/")
-# duracion=50
-# data.music=secuence.end%%161
-# sample=data.frame(head(data.music,duracion))
-# Wobj=vector("list",duracion)
-# Wobj2=readWave("0.wav")
-# contador=1
-# for (contador in 1:duracion)
-# {
-# pista=sample[contador,]
-# fichero=paste0(pista,".wav")
-# Wobj[contador]=readWave(fichero)
-# Wobj2<-bind(Wobj2,Wobj[[contador]])
-# }
-# setwd("C:/Users/mrodmui/Desktop/DETMUS/TRACKS_GENERADOS")
-# writeWave(Wobj2, filename = "Track_TR909.wav")
-# setwd("C:/Users/mrodmui/Desktop/DETMUS")
-
+Generaci贸n del TRACK de Percusi贸n (TR-909)
+setwd("C:/Users/mrodmui/Desktop/DETMUS/LOOPS/ROLAND_TR-909/")
+duracion=50
+data.music=secuence.end%%161
+sample=data.frame(head(data.music,duracion))
+Wobj=vector("list",duracion)
+Wobj2=readWave("0.wav")
+contador=1
+for (contador in 1:duracion)
+{
+pista=sample[contador,]
+fichero=paste0(pista,".wav")
+Wobj[contador]=readWave(fichero)
+Wobj2<-bind(Wobj2,Wobj[[contador]])
+}
+setwd("C:/Users/mrodmui/Desktop/DETMUS/TRACKS_GENERADOS")
+writeWave(Wobj2, filename = "Track_TR909.wav")
+setwd("C:/Users/mrodmui/Desktop/DETMUS")
 
 # Ahora a producir los tracks generados de la carpeta TRACKS_GENERADOS
 # con nuestro software preferido
